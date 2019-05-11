@@ -1,0 +1,11 @@
+Add exe here when everything is okay
+
+Steps to create exe from the python script:
+1. Before that you should have Pyinstaller installed.
+2. If pyinstaller is not check if the pip is installed.
+3. If yes, then hit:
+	pip install pyinstaller
+4. This is will install pyinstaller in windows
+5. If pip is not installed, then install pip first and then hit the above command again.
+6. To create the exe file go to your script file path and hit the following command:
+	pyinstaller portscanner.py

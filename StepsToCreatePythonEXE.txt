@@ -1,0 +1,7 @@
+1. Set Path variable to script that is needed to be converted.
+2. pip install pyinstaller -> cmd
+3. pyinstaller -> cmd
+4. Go to folder directory and open cmd:
+	pyinstaller <my_script_name.py>
+	pyinstaller -w <my_script_name.py> (*console is not needed)
+	pyinstaller -F <my_script_name.py> (*will not create on exe)
