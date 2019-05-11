@@ -1,6 +1,18 @@
 # python-port-scanner
 It is a python based side project for scanning open ports in a server that works with windows only if 'tnc' command is enabled. Other OS and commands will be added based on requests and after completion of the windows part.
 
+## Code Approval and Branch Structure:
+The base branch is 'master -> origin/master'.
+The branch where we develop and review the code and changes is 'develop -> origin/develop'
+Contributors should first create there own branches with the following naming conventions:
+1. Contributor Tag + _ + Task name phrase + _ + date today in the format (dd_mm_yyyy)
+2. Contributor Tag is the name by which contributor commit the code (eg, Dhruv, thisisdg etc.)
+3. Task name is the phrase of the task subject that you are going to work with in that branch.
+4. And the date  on which you have created that branch.
+5. So according to the above conventions, the name of the branch would be like the following:
+    thisisdg_cascadedInputs_5_11_2019
+6. Every conflict will be resolved in the same branch that you are working with. The PR will be raised pointing to develop branch and then the code will be review in develop branch.
+
 ## How to run it?
 1. Clone this repository to your local drive.
 2. Navigate to the path where python-port-scanner folder is located in your local directory.
