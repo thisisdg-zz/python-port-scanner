@@ -100,3 +100,4 @@ def __decode__(to_decode, iv, key):
         to_decode = to_decode.decode()
     # remove pad
     return __unpad__(to_decode)
+    
