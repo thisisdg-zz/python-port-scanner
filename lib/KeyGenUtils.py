@@ -71,21 +71,21 @@ def verify_key_by_username_and_system(key):
 
 # Demo
 # By System
-key = get_key_by_system()
-print(__get_mac__() + "   " + key)
-print(verify_key_by_system(key))
+# key = get_key_by_system()
+# print(__get_mac__() + "   " + key)
+# print(verify_key_by_system(key))
 
-# By Username
-key = get_key_by_username()
-print(__get_current_user__() + "   " + key)
-print(verify_key_by_username(key))
+# # By Username
+# key = get_key_by_username()
+# print(__get_current_user__() + "   " + key)
+# print(verify_key_by_username(key))
 
-# By Username
-key = get_key_by_username()
-print(__get_current_user__() + "   " + key)
-print(verify_key_by_username(key))
+# # By Username
+# key = get_key_by_username()
+# print(__get_current_user__() + "   " + key)
+# print(verify_key_by_username(key))
 
 # By Username and System
-key = get_key_by_username_and_system()
-print(__get_current_user__() + "   " + __get_mac__() + "   " + key)
-print(verify_key_by_username_and_system(key))
+# key = get_key_by_username_and_system()
+# print(__get_current_user__() + "   " + __get_mac__() + "   " + key)
+# print(verify_key_by_username_and_system(key))
