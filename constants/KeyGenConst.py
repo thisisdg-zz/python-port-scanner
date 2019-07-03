@@ -5,5 +5,5 @@
 
 IV = "@@@@&&&&####$$$$"
 BLOCK_SIZE = 16
-SECRET_KEY = b'Iy9UErx4chg4fdA6'
+SECRET_KEY = b'abcd1234@#$%ABCD'
 SALT = "1234"

@@ -21,103 +21,103 @@ from constants import KeyGenConst
 
 
 # return MAC address @return type String
-def __get_mac__():
+def __getMac__():
     mac = hex(uuid.getnode())
     return mac
 
 
 # return system user login id @return type String
-def __get_current_user__():
+def __getCurrentUser__():
     username = getpass.getuser()
     return username
 
 
 # One System -> One Key @return type String
-def get_key_by_system():
+def getKeyBySystem():
     params = {
-        'MAC': str(__get_mac__())
+        'MAC': str(__getMac__())
     }
-    json_string = json.dumps(params)
-    key = __generate_key__(json_string)
+    jsonString = json.dumps(params)
+    key = __generateKey__(jsonString)
     return key
 
 
 # One User -> One Key @return type String
-def get_key_by_username():
+def getKeyByUsername():
     params = {
-        'USERNAME': str(__get_current_user__())
+        'USERNAME': str(__getCurrentUser__())
     }
-    json_string = json.dumps(params)
-    key = __generate_key__(json_string)
+    jsonString = json.dumps(params)
+    key = __generateKey__(jsonString)
     return key
 
 
 # One User and One System -> One Key @return type String
-def get_key_by_username_and_system():
+def getKeyByUsernameAndSystem():
     params = {
-        'USERNAME': str(__get_current_user__()),
-        'MAC': str(__get_mac__())
+        'USERNAME': str(__getCurrentUser__()),
+        'MAC': str(__getMac__())
     }
-    json_string = json.dumps(params)
-    key = __generate_key__(json_string)
+    jsonString = json.dumps(params)
+    key = __generateKey__(jsonString)
     return key
 
 
-# @return type boolean
-def verify_key_by_system(key):
+# @argument type String and @return type boolean
+def verifyKeyBySystem(key):
     params = {
-        'MAC': str(__get_mac__())
+        'MAC': str(__getMac__())
     }
-    json_string = json.dumps(params)
-    isVerified = __verify_key__(json_string, key)
+    jsonString = json.dumps(params)
+    isVerified = __verifyKey__(jsonString, key)
     return isVerified
 
 
-# @return type boolean
-def verify_key_by_username(key):
+# @argument type String and @return type boolean
+def verifyKeyByUsername(key):
     params = {
-        'USERNAME': str(__get_current_user__())
+        'USERNAME': str(__getCurrentUser__())
     }
-    json_string = json.dumps(params)
-    isVerified = __verify_key__(json_string, key)
+    jsonString = json.dumps(params)
+    isVerified = __verifyKey__(jsonString, key)
     return isVerified
 
 
-# @return type boolean
-def verify_key_by_username_and_system(key):
+# @argument type String and @return type boolean
+def verifyKeyByUsernameAndSystem(key):
     params = {
-        'USERNAME': str(__get_current_user__()),
-        'MAC': str(__get_mac__())
+        'USERNAME': str(__getCurrentUser__()),
+        'MAC': str(__getMac__())
     }
-    json_string = json.dumps(params)
-    isVerified = __verify_key__(json_string, key)
+    jsonString = json.dumps(params)
+    isVerified = __verifyKey__(jsonString, key)
     return isVerified
 
 
 # @argument type String and @return type String
-def __generate_key__(json_string):
-    hasher = __sha256_encode__(json_string)
-    return __aes_encode__(hasher)
+def __generateKey__(jsonString):
+    hasher = __sha256Encode__(jsonString)
+    return __aesEncode__(hasher)
 
 
-# @argument type tring and @return type boolean
-def __verify_key__(hash_string, key_to_be_verify):
-    provided_hash = __aes_decode__(key_to_be_verify)
-    original_hash = __sha256_encode__(hash_string)
-    return original_hash == provided_hash
+# @argument type String and @return type boolean
+def __verifyKey__(hashString, keyToBeVerify):
+    providedHash = __aesDecode__(keyToBeVerify)
+    originalHash = __sha256Encode__(hashString)
+    return originalHash == providedHash
 
 
 # SHA-256 Cryptographic Hash Algorithm.
 # SHA-256 generates an almost-unique 256-bit (32-byte) signature for a text.
 # @return type String
 
-def __sha256_encode__(toencode_string):
+def __sha256Encode__(toEncodeString):
     # Appending SALT to toencode_string
-    toencode_string = '%s|%s' % (toencode_string, KeyGenConst.SALT)
-    return hashlib.sha256(toencode_string.encode()).hexdigest()
+    toEncodeString = '%s|%s' % (toEncodeString, KeyGenConst.SALT)
+    return hashlib.sha256(toEncodeString.encode()).hexdigest()
 
 
-# Pad to make the to_encode string multiple of BLOCK_SIZE
+# Pad to make the toEncode string multiple of BLOCK_SIZE
 def __pad__(s): return s + (KeyGenConst.BLOCK_SIZE - len(s) % KeyGenConst.BLOCK_SIZE) * \
     chr(KeyGenConst.BLOCK_SIZE - len(s) % KeyGenConst.BLOCK_SIZE)
 
@@ -127,32 +127,32 @@ def __unpad__(s): return s[0:-ord(s[-1])]
 
 
 # Advanced Encryption Standard(AES) using Ciphertext Block Chaining(CBC)
-def __aes_encode__(to_encode):
-    to_encode = __pad__(to_encode)
+def __aesEncode__(toEncode):
+    toEncode = __pad__(toEncode)
 
     cipher = AES.new(KeyGenConst.SECRET_KEY, AES.MODE_CBC,
                      KeyGenConst.IV.encode('latin-1'))
-    encrypted_bytes = cipher.encrypt(to_encode.encode('latin-1'))
+    encryptedBytes = cipher.encrypt(toEncode.encode('latin-1'))
 
     # Base 64 encode
-    to_encode = base64.b64encode(encrypted_bytes)
+    toEncode = base64.b64encode(encryptedBytes)
 
     # decode UTF-8 is used to convert bytes in to the String
-    return to_encode.decode("UTF-8")
+    return toEncode.decode("UTF-8")
 
 
-def __aes_decode__(to_decode):
+def __aesDecode__(toDecode):
     # Base 64 decode
-    to_decode = base64.b64decode(to_decode)
+    toDecode = base64.b64decode(toDecode)
 
     # Decrypt
     cipher = AES.new(KeyGenConst.SECRET_KEY, AES.MODE_CBC,
                      KeyGenConst.IV.encode('latin-1'))
-    to_decode = cipher.decrypt(to_decode)
+    toDecode = cipher.decrypt(toDecode)
 
     # decode UTF-8 is used to convert bytes in to the String
-    if type(to_decode) == bytes:
-        to_decode = to_decode.decode("UTF-8")
+    if type(toDecode) == bytes:
+        toDecode = toDecode.decode("UTF-8")
 
     # unpad the data
-    return __unpad__(to_decode)
+    return __unpad__(toDecode)

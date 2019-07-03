@@ -6,22 +6,17 @@ from lib import KeyGenUtils
 
 # Demo
 # By System
-key = KeyGenUtils.get_key_by_system()
-print(KeyGenUtils.__get_mac__() + "   " + key)
-print(KeyGenUtils.verify_key_by_system(key))
+key = KeyGenUtils.getKeyBySystem()
+print(KeyGenUtils.__getMac__() + "   " + key)
+print(KeyGenUtils.verifyKeyBySystem(key))
 
 # By Username
-key = KeyGenUtils.get_key_by_username()
-print(KeyGenUtils.__get_current_user__() + "   " + key)
-print(KeyGenUtils.verify_key_by_username(key))
-
-# By Username
-key = KeyGenUtils.get_key_by_username()
-print(KeyGenUtils.__get_current_user__() + "   " + key)
-print(KeyGenUtils.verify_key_by_username(key))
+key = KeyGenUtils.getKeyByUsername()
+print(KeyGenUtils.__getCurrentUser__() + "   " + key)
+print(KeyGenUtils.verifyKeyByUsername(key))
 
 # By Username and System
-key = KeyGenUtils.get_key_by_username_and_system()
-print(KeyGenUtils.__get_current_user__() + "   " +
-      KeyGenUtils.__get_mac__() + "   " + key)
-print(KeyGenUtils.verify_key_by_username_and_system(key))
+key = KeyGenUtils.getKeyByUsernameAndSystem()
+print(KeyGenUtils.__getCurrentUser__() + "   " +
+      KeyGenUtils.__getMac__() + "   " + key)
+print(KeyGenUtils.verifyKeyByUsernameAndSystem(key))
